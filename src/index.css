@@ -1,0 +1,20 @@
+@import url('bootstrap');
+@import url('bootstrap-icons');
+
+
+
+/*Typography*/
+
+a {
+  color: black;
+  text-decoration: none;
+  padding: 0.5rem;
+}
+
+a.active {
+  color: white;
+}
+
+a#always-active {
+  color: black;
+}
