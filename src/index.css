@@ -60,7 +60,25 @@ a {
 .product {
   position: relative;
 
+  .img-cont {
+    margin-bottom: 1rem;
+
+    img {
+      height: 35vh;
+
+    }
+  }
+
   .rating {
     position: absolute;
+    font-size: 1.3rem;
+    top: 10px;
+    right: 10px;
+  }
+
+  .buttons {
+    display: flex;
+    margin-top: 1rem;
+    justify-content: space-between;
   }
 }

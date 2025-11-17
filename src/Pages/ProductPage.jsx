@@ -1,13 +1,18 @@
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 import axios from "axios"
+import { Helix } from 'ldrs/react'
+import 'ldrs/react/Helix.css'
+
 
 
 export default function ProductPage() {
 
     const { id } = useParams()
-    //Create variable to store products data
+
     const [product, setProduct] = useState([])
+
+    const [loading, setLoading] = useState(true)
 
     const navigate = useNavigate()
 
@@ -24,44 +29,73 @@ export default function ProductPage() {
                     navigate(-1)
                 }
 
-
-
             }
             )
+            .finally(() => setLoading(false))
     }
 
-    useState(getProduct, [])
+    useEffect(getProduct, [id])
+
+    function handlePrev() {
+        navigate(`/Products/${product.id - 1}`)
 
 
+    }
+    function handleNext() {
+        navigate(`/Products/${product.id + 1}`)
+
+
+    }
 
     return (
+        <>
+            {loading ? <div className="container d-flex justify-content-around p-5">
+                <Helix
+                    size="150"
+                    speed="2.5"
+                    color="black"
+                />
+            </div> :
 
-        <div key={product.id} className="container">
-            <div className="product d-flex justify-content-center min-vh-75 py-5">
-                <div className="img-cont px-5">
-                    <img src={product.image} className="card-img-top w-100" alt={product.image} />
+                <div className="container">
+                    <div className="product d-flex flex-column justify-content-center py-5 align-items-center">
+                        <div className="img-cont px-5">
+                            <img src={product.image} className="card-img-top" alt={product.image} />
+                        </div>
+
+                        <div className="card-body">
+                            <h6 className="card-title">{product.title}</h6>
+                            <p className="card-text">{product.price}€</p>
+                            <p className="card-text">{product.description}</p>
+
+
+                        </div>
+
+                        <div className="rating">
+                            <span className="card-text pe-1">
+                                {product.rating?.rate}/5
+                            </span>
+                            <span className="text-warning">
+                                <i className="bi bi-star-fill"></i>
+                            </span>
+                            <span className="ps-2">
+                                {product.rating?.count}
+                            </span>
+                        </div>
+                        <div className="container buttons">
+                            <button disabled={product.id === 1}
+                                className="btn btn-dark"
+                                onClick={handlePrev}>
+                                Prev
+                            </button>
+                            <button className="btn btn-dark"
+                                onClick={handleNext}>
+                                Next
+                            </button>
+                        </div>
+                    </div>
                 </div>
-
-                <div className="card-body">
-                    <h6 className="card-title">{product.title}</h6>
-                    <p className="card-text">{product.price}€</p>
-                    <p className="card-text">{product.description}</p>
-
-
-                </div>
-
-                <div className="rating">
-                    <span className="card-text pe-1">
-                        {product.rating?.rate}/5
-                    </span>
-                    <span className="text-warning">
-                        <i className="bi bi-star-fill"></i>
-                    </span>
-                    <span className="ps-2">
-                        {product.rating?.count}
-                    </span>
-                </div>
-            </div>
-        </div>
+            }
+        </>
     )
 }
