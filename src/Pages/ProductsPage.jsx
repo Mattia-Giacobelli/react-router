@@ -31,7 +31,7 @@ export default function ProductsPage() {
                             <div key={product.id} className="col-2 mb-3">
                                 <Link to={`/Products/${product.id}`}>
                                     <div className="card h-100">
-                                        <div className="img-cont">
+                                        <div className="img-cont p-3">
                                             <img src={product.image} className="card-img-top w-100" alt={product.image} />
                                         </div>
 

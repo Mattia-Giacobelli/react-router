@@ -19,7 +19,7 @@ export default function AboutUsPage() {
                                 Privacy
                             </h5>
                             <p>
-                                Learn more about how your data will be selled
+                                Learn more about how your data will be sold
                             </p>
                         </div>
                         <div className="col-4 text-center">
