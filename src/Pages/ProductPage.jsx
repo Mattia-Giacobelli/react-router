@@ -38,12 +38,13 @@ export default function ProductPage() {
 
     function handlePrev() {
         navigate(`/Products/${product.id - 1}`)
+        setLoading(true)
 
 
     }
     function handleNext() {
         navigate(`/Products/${product.id + 1}`)
-
+        setLoading(true)
 
     }
 
